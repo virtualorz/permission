@@ -234,7 +234,7 @@ class Permission
 
             self::$message['status'] = 1;
             self::$message['status_string'] = '刪除成功';
-            self::$message['data']['redirectURL'] = Route(Route::getCurrentRoute()->action['as']);
+            self::$message['data']['redirectURL'] = Route(Route::getCurrentRoute()->action['parent']);
 
         }catch (\Exception $ex){
             DB::rollBack();
