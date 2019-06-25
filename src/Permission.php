@@ -247,7 +247,7 @@ class Permission
 
     }
 
-    public function permissionList($keyword = null,$page = 15){
+    public function permissionList($keyword = null){
 
         //先取得有設定權限的人員
         $member_permissioned_array = [];
@@ -296,6 +296,22 @@ class Permission
 
     }
 
+    public function getPermissionItem($id){
+
+        //取得已經設定的權限內容
+        $permissionedArray = [];
+        $permissioned = system_permission::where('member_id',$id)->get();
+        foreach($permissioned as $k=>$v){
+            $permissionedArray[$v->permission_group_id] = $v;
+        }
+
+        //取得所有可用群組
+        $group = system_permission_group::all();
+
+        return [$permissionedArray,$group];
+
+    }
+
     public function permissionEdit($column){
 
         DB::beginTransaction();
@@ -316,11 +332,21 @@ class Permission
                 }
             }
 
+            $return_target = '';
+            $parent = Route::getCurrentRoute()->action['parent'];
+            $routes = Route::getRoutes();
+            foreach ($routes as $route) {
+                $action = $route->getAction();
+                if (!empty($action['as']) && $parent == $action['as']) {
+                    $return_target = $route->action['parent'];
+                }
+            }
+
             DB::commit();
 
             self::$message['status'] = 1;
             self::$message['status_string'] = '編輯成功';
-            self::$message['data']['redirectURL'] = Route(Route::getCurrentRoute()->action['parent']);
+            self::$message['data']['redirectURL'] = Route($return_target);
         }catch (\Exception $ex){
             DB::rollBack();
 
@@ -346,7 +372,7 @@ class Permission
 
             self::$message['status'] = 1;
             self::$message['status_string'] = '刪除成功';
-            self::$message['data']['redirectURL'] = Route(Route::getCurrentRoute()->action['as']);
+            self::$message['data']['redirectURL'] = Route(Route::getCurrentRoute()->action['parent']);
 
         }catch (\Exception $ex){
             DB::rollBack();

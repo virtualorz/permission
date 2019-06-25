@@ -91,6 +91,9 @@ create middleware , in middleware call 'checkLogin' , 'checkLoginCustomer', 'che
 ###### permissionList($keyword = null,$page = 15)
 `return the permission data, @$keyword for search member name, @$page for paginate per page`
 
+###### getPermissionItem($id)
+`retmurn the member setted permission and all grops data as Array`
+
 ###### permissionEdit($column)
 `return the result message for edit permission data to database, @$column['select'] for group selected as array, @$cloumn['id'] for member id`
 
