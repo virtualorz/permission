@@ -33,12 +33,12 @@ class Permission
 
     }
 
-    public function checkLoginCustomer($request){
+    public function checkLoginCustomer($request,$parameter){
 
         if(session(env('LOGINSESSION_CUSTOMER','virtualorz_customer_default')) == null && session(env('LOGINSESSION','virtualorz_default')) == null)
         {
             session(['return_url'=> $request->fullUrl()]);
-            return redirect(env('LOGINPAGE_CUSTOMER','login'));
+            return redirect(env('LOGINPAGE_CUSTOMER','login'),$parameter);
         }
 
         return true;

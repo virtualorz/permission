@@ -15,7 +15,7 @@ edit config/app.php
     
     'aliases' => [
         ...
-        'Sitemap' => Virtualorz\Permission\Facades\Permission::class,
+        'Permission' => Virtualorz\Permission\Facades\Permission::class,
     ]
     
 # Publish data
@@ -33,13 +33,33 @@ add LOGINPAGE for route name to login page <br />
  
 # Usage
 create middleware , in middleware call 'checkLogin' , 'checkLoginCustomer', 'checkPermission' method to check login and permission <br />
+
+# Meiddleware Example for checkLogin
+    $result = Permission::checkLogin($request);
     
+            if($result !== true){
+                return $result;
+            }
+            else{
+                return $next($request);
+            }
+            
+# Meiddleware Example for checkLoginCustomer
+    $result = Permission::checkLoginCustomer($request,['hash'=>'0098765']);
+    
+            if($result !== true){
+                return $result;
+            }
+            else{
+                return $next($request);
+            }
+
 # Method
 
-###### checkLogin
+###### checkLogin($request)
 `check admin is login or not, if login return true, if not redirect to login page set in env('LOGINPAGE')`
 
-###### checkLoginCustomer
+###### checkLoginCustomer($request,$parameter)
 `check customer is login or not, if login return true, if not redirect to login page set in env('LOGINPAGE')`
 
 ###### checkPermission
