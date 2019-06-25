@@ -133,6 +133,15 @@ class Permission
 
     }
 
+    public function getGroupItem($id){
+
+        $data = system_permission_group::findOrFail($id);
+        $data->permission = json_decode($data->permission,true);
+
+        return $data;
+
+    }
+
     public function groupEdit($column){
 
         $validator = Validator::make($column,[

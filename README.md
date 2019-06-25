@@ -30,6 +30,7 @@ edit laravel .env file on project root <br />
 add LOGINSESSION for the name store in session use for admin login on backand <br />
 add LOGINSESSION_CUSTOMER for the name store in session use for customer login on frontend<br />
 add LOGINPAGE for route name to login page <br />
+add LOGINPAGE_CUSTOMER for route name to customer login page <br />
  
 # Usage
 create middleware , in middleware call 'checkLogin' , 'checkLoginCustomer', 'checkPermission' method to check login and permission <br />
@@ -54,6 +55,13 @@ create middleware , in middleware call 'checkLogin' , 'checkLoginCustomer', 'che
                 return $next($request);
             }
 
+# Middleware Example for checkPermission
+    $result = Permission::checkPermission();
+    
+            if($result){
+                return $next($request);
+            }
+
 # Method
 
 ###### checkLogin($request)
@@ -70,6 +78,9 @@ create middleware , in middleware call 'checkLogin' , 'checkLoginCustomer', 'che
 
 ###### groupAdd($column)
 `return the result message for add permission group data to database, @$column['name'] for group name, @column['identity'] for identity id set in config, @$column['permission'] for permission item as array`
+
+###### getGroupItem($id)
+`retmurn the group item @$id for group item id`
 
 ###### groupEdit($column)
 `return the result message for edit permission group data to database, @$column['name'] for group name, @column['identity'] for identity id set in config, @$column['permission'] for permission item as array, @$cloumn['id'] for permission edit primary id`
