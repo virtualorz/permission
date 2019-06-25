@@ -29,6 +29,7 @@ class PermissionServiceProvider extends ServiceProvider
         //
         $this->publishes([
             __DIR__.'/config' => base_path('config'),
+            __DIR__.'/asset/treeView' => public_path('vendor/treeView'),
         ]);
     }
 }
