@@ -117,11 +117,21 @@ class Permission
 
             ActionLog::save(Route::getCurrentRoute()->action['parent'],1,'新增權限群組',$system_permission_group);
 
+            $return_target = '';
+            $parent = Route::getCurrentRoute()->action['parent'];
+            $routes = Route::getRoutes();
+            foreach ($routes as $route) {
+                $action = $route->getAction();
+                if (!empty($action['as']) && $parent == $action['as']) {
+                    $return_target = $route->action['parent'];
+                }
+            }
+
             DB::commit();
 
             self::$message['status'] = 1;
             self::$message['status_string'] = '新增成功';
-            self::$message['data']['redirectURL'] = Route(Route::getCurrentRoute()->action['parent']);
+            self::$message['data']['redirectURL'] = Route($return_target);
         }catch (\Exception $ex){
             DB::rollBack();
 
@@ -182,11 +192,22 @@ class Permission
 
             $data->save();
 
+            $return_target = '';
+            $parent = Route::getCurrentRoute()->action['parent'];
+            $routes = Route::getRoutes();
+            foreach ($routes as $route) {
+                $action = $route->getAction();
+                if (!empty($action['as']) && $parent == $action['as']) {
+                    $return_target = $route->action['parent'];
+                }
+            }
+
             DB::commit();
+
 
             self::$message['status'] = 1;
             self::$message['status_string'] = '編輯成功';
-            self::$message['data']['redirectURL'] = Route(Route::getCurrentRoute()->action['parent']);
+            self::$message['data']['redirectURL'] = Route($return_target);
 
         }catch (\Exception $ex){
             DB::rollBack();
