@@ -26,7 +26,7 @@ class Permission
         if(session(env('LOGINSESSION','virtualorz_default')) == null)
         {
             session(['return_url'=> $request->fullUrl()]);
-            return redirect(env('LOGINPAGE','login'));
+            return redirect()->route(env('LOGINPAGE','login'));
         }
 
         return true;
@@ -38,7 +38,7 @@ class Permission
         if(session(env('LOGINSESSION_CUSTOMER','virtualorz_customer_default')) == null && session(env('LOGINSESSION','virtualorz_default')) == null)
         {
             session(['return_url'=> $request->fullUrl()]);
-            return redirect(env('LOGINPAGE_CUSTOMER','login'),$parameter);
+            return redirect()->route(env('LOGINPAGE_CUSTOMER','login'),$parameter);
         }
 
         return true;
