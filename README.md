@@ -21,6 +21,9 @@ edit config/app.php
 # Publish data
     php artisan vendor:publish --provider="Virtualorz\Permission\PermissionServiceProvider"
 
+# Run Migration
+    php artisan migrate --path=/vendor/virtualorz/actionlog/src/migrations
+
 # Edit Config
 edit config/permission_identity , <br />
 for three level edit the name you want
