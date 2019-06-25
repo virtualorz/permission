@@ -65,6 +65,25 @@ create middleware , in middleware call 'checkLogin' , 'checkLoginCustomer', 'che
                 return $next($request);
             }
 
+# Greate tree view in view
+    include in blade
+    <link rel="stylesheet" href="{{ asset('vendor/treeView/bootstrap-treeview.css') }}">
+    <script src="{{ asset('vendor/treeView/bootstrap-treeview.js') }}"></script>
+    <script src="{{ asset('vendor/treeView/permission_tree.js') }}"></script>
+    
+    in HTMLa
+    <input type="hidden" id="tree_node" value="{{ $sitemap }}"> <!-- this to generate tree-->
+    <input type="hidden" name="permission" id="permission" value="[]"> <!-- thid to save tree value-->
+    
+    before form submit
+    $("#permission").val(JSON.stringify($('#treeview').treeview('getChecked')));
+    
+    in Cntroller, use sitmap to generate json
+    $sitemap = Sitemap::getTreeView();
+    $sitemap = Sitemap::routStruct('root',$sitemap);
+    $sitemap = json_encode($sitemap);
+
+
 # Method
 
 ###### checkLogin($request)
