@@ -71,14 +71,14 @@ create middleware , in middleware call 'checkLogin' , 'checkLoginCustomer', 'che
     <script src="{{ asset('vendor/treeView/bootstrap-treeview.js') }}"></script>
     <script src="{{ asset('vendor/treeView/permission_tree.js') }}"></script>
     
-    in HTMLa
+    in HTML
     <input type="hidden" id="tree_node" value="{{ $sitemap }}"> <!-- this to generate tree-->
     <input type="hidden" name="permission" id="permission" value="[]"> <!-- thid to save tree value-->
     
     before form submit
     $("#permission").val(JSON.stringify($('#treeview').treeview('getChecked')));
     
-    in Cntroller, use sitmap to generate json
+    in Controller, use sitemap to generate JSON
     $sitemap = Sitemap::getTreeView();
     $sitemap = Sitemap::routStruct('root',$sitemap);
     $sitemap = json_encode($sitemap);
@@ -90,7 +90,7 @@ create middleware , in middleware call 'checkLogin' , 'checkLoginCustomer', 'che
 `check admin is login or not, if login return true, if not redirect to login page set in env('LOGINPAGE')`
 
 ###### checkLoginCustomer($request,$parameter)
-`check customer is login or not, if login return true, if not redirect to login page set in env('LOGINPAGE')`
+`check customer is login or not, if login return true, if not redirect to login page set in env('LOGINSESSION_CUSTOMER')`
 
 ###### checkPermission
 `check admin has permission to use this page or not, if yes returen true, if not return abort 403 page`
