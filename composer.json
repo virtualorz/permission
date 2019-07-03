@@ -7,8 +7,8 @@
         }
     ],
     "require": {
-        "virtualorz/actionLog": "^0.0.7",
-        "virtualorz/sitemap": "^0.0.2"
+        "virtualorz/actionLog": "^0.0.8",
+        "virtualorz/sitemap": "^0.0.3"
     },
     "autoload": {
         "psr-4": {
