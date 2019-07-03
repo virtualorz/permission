@@ -121,3 +121,6 @@ create middleware , in middleware call 'checkLogin' , 'checkLoginCustomer', 'che
 
 ###### permissionDelete($column)
 `return the result message for delete permission data from database, @$cloumn['id'] for member id`
+
+# 中文版本文件
+[Permission : 為網站加入權限管理](http://www.alvinchen.club/2019/07/01/%e4%bd%9c%e5%93%81laravel-package-permission-%e7%82%ba%e7%b6%b2%e7%ab%99%e5%8a%a0%e5%85%a5%e6%ac%8a%e9%99%90%e7%ae%a1%e7%90%86/)
